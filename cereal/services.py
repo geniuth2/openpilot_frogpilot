@@ -74,6 +74,11 @@ _services: dict[str, tuple] = {
   "userFlag": (True, 0., 1),
   "microphone": (True, 10., 10),
 
+
+  #TODO-FROG-CHERRY
+  #NDA
+  "naviData": (False, 0.),
+
   # debug
   "uiDebug": (True, 0., 1),
   "testJoystick": (True, 0.),
