@@ -64,6 +64,8 @@ def manager_init() -> None:
     ("TetheringEnabled", "0"),
     ("UpdaterAvailableBranches", ""),
     ("LongitudinalPersonality", str(log.LongitudinalPersonality.standard)),
+    ("AutoNaviSpeedCtrlStart", "25"),
+    ("AutoNaviSpeedCtrlEnd", "15"),
   ]
   if not PC:
     default_params.append(("LastUpdateTime", datetime.datetime.utcnow().isoformat().encode('utf8')))

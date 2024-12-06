@@ -30,6 +30,8 @@ from openpilot.selfdrive.controls.lib.longcontrol import LongControl
 from openpilot.selfdrive.controls.lib.vehicle_model import VehicleModel
 
 from openpilot.system.hardware import HARDWARE
+from openpilot.system.version import get_short_branch
+from selfdrive.road_speed_limiter import SpeedLimiter
 
 from openpilot.selfdrive.frogpilot.controls.lib.frogpilot_acceleration import get_max_allowed_accel
 from openpilot.selfdrive.frogpilot.frogpilot_variables import NON_DRIVING_GEARS, get_frogpilot_toggles, params_memory
@@ -161,6 +163,14 @@ class Controls:
     self.v_cruise_helper = VCruiseHelper(self.CP)
     self.recalibrating_seen = False
 
+    # NDA neokii
+    self.v_cruise_kph_limit = 0
+    self.slowing_down = False
+    self.slowing_down_sound_alert = False
+    self.second = 0.0
+    self.autoNaviSpeedCtrlStart = float(Params().get("AutoNaviSpeedCtrlStart"))
+    self.autoNaviSpeedCtrlEnd = float(Params().get("AutoNaviSpeedCtrlEnd"))
+
     self.can_log_mono_time = 0
 
     if car_recognized and not self.CP.passive and self.CP.secOcRequired and not self.CP.secOcKeyAvailable:
@@ -199,6 +209,10 @@ class Controls:
     self.use_old_long = self.frogpilot_toggles.old_long_api
 
     self.display_timer = 0
+
+  def reset(self):
+    self.slowing_down = False
+    self.slowing_down_sound_alert = False
 
   def set_initial_state(self):
     if REPLAY:
@@ -321,6 +335,14 @@ class Controls:
 
       if log.PandaState.FaultType.relayMalfunction in pandaState.faults:
         self.events.add(EventName.relayMalfunction)
+
+    # NDA neokii
+    self.second += DT_CTRL
+    if self.second > 1.0:
+      self.autoNaviSpeedCtrlStart = float(Params().get("AutoNaviSpeedCtrlStart"))
+      self.autoNaviSpeedCtrlEnd = float(Params().get("AutoNaviSpeedCtrlEnd"))
+
+      self.second = 0.0
 
     # Handle HW and system malfunctions
     # Order is very intentional here. Be careful when modifying this.
@@ -482,6 +504,23 @@ class Controls:
     """Compute conditional state transitions and execute actions on state transitions"""
 
     self.v_cruise_helper.update_v_cruise(CS, self.enabled, self.is_metric, self.sm['frogpilotPlan'].speedLimitChanged, self.frogpilot_toggles)
+
+    # NDA neokii
+    apply_limit_speed, road_limit_speed, left_dist, first_started, limit_log = SpeedLimiter.instance().get_max_speed(CS, self.v_cruise_helper.v_cruise_kph, self.autoNaviSpeedCtrlStart, self.autoNaviSpeedCtrlEnd)
+    if apply_limit_speed >= 20:
+      self.v_cruise_kph_limit = min(apply_limit_speed, self.v_cruise_helper.v_cruise_kph)
+
+      if CS.vEgo * CV.MS_TO_KPH > apply_limit_speed:
+        self.events.add(EventName.slowingDownSpeedSound)
+
+        if not self.slowing_down:
+          self.slowing_down_sound_alert = True
+          self.slowing_down = True
+        self.slowing_down_sound_alert = True
+
+    else:
+      self.reset()
+      self.v_cruise_kph_limit = self.v_cruise_helper.v_cruise_kph
 
     # decrement the soft disable timer at every step, as it's reset on
     # entrance in SOFT_DISABLING state
@@ -785,7 +824,7 @@ class Controls:
       CC.cruiseControl.resume = self.enabled and CS.cruiseState.standstill and speeds[-1] > 0.1
 
     hudControl = CC.hudControl
-    hudControl.setSpeed = float(self.v_cruise_helper.v_cruise_cluster_kph * CV.KPH_TO_MS)
+    hudControl.setSpeed = float(self.v_cruise_kph_limit * CV.KPH_TO_MS)
     hudControl.speedVisible = self.enabled
     hudControl.lanesVisible = self.enabled
     hudControl.leadVisible = self.sm['longitudinalPlan'].hasLead
@@ -868,7 +907,7 @@ class Controls:
     controlsState.engageable = not self.events.contains(ET.NO_ENTRY)
     controlsState.longControlState = self.LoC.long_control_state
     controlsState.vPid = float(self.LoC.v_pid)
-    controlsState.vCruise = float(self.v_cruise_helper.v_cruise_kph)
+    controlsState.vCruise = float(self.v_cruise_kph_limit)
     controlsState.vCruiseCluster = float(self.v_cruise_helper.v_cruise_cluster_kph)
     controlsState.upAccelCmd = float(self.LoC.pid.p)
     controlsState.uiAccelCmd = float(self.LoC.pid.i)
