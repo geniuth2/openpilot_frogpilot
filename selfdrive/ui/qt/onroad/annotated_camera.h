@@ -182,6 +182,9 @@ private:
   inline QColor yellowColor(int alpha = 255) { return QColor(255, 255, 0, alpha); }
 
 protected:
+  // NDA neokii
+  void drawRoadLimitSpeed(QPainter &p);
+
   void paintGL() override;
   void initializeGL() override;
   void showEvent(QShowEvent *event) override;
