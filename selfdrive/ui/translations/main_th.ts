@@ -549,7 +549,7 @@
     </message>
     <message>
         <source>The resistance in steering. Higher values provide more stable steering but can make it feel heavy, while lower values allow lighter steering but may feel too sensitive.</source>
-        <translation type="unfinished"></translation>
+        <translation>조향 저항. 값이 높을수록 조향이 더 안정적이지만 무거워질 수 있고, 값이 낮을수록 조향이 가볍지만 너무 민감하게 느껴질 수 있습니다.</translation>
     </message>
     <message>
         <source>Kp Factor (Default: %1)</source>
@@ -561,7 +561,7 @@
     </message>
     <message>
         <source>How aggressively the car corrects its steering. Higher values offer quicker corrections but may feel jerky, while lower values make steering smoother but slower to respond.</source>
-        <translation type="unfinished"></translation>
+        <translation>자동차가 스티어링을 얼마나 적극적으로 보정하는지. 값이 높을수록 보정이 더 빠르지만 갑작스럽게 느껴질 수 있고, 값이 낮을수록 스티어링이 더 부드럽지만 반응 속도가 느려집니다.</translation>
     </message>
     <message>
         <source>Lateral Accel (Default: %1)</source>
@@ -573,7 +573,7 @@
     </message>
     <message>
         <source>Adjust how fast the car can steer from side to side. Higher values allow quicker lane changes but can feel unstable, while lower values provide smoother steering but may feel sluggish.</source>
-        <translation type="unfinished"></translation>
+        <translation>차량이 좌우로 얼마나 빨리 조향할 수 있는지 조정합니다. 값이 높을수록 차선 변경이 더 빠르지만 불안정하게 느껴질 수 있고, 값이 낮을수록 조향이 더 부드럽지만 느리게 느껴질 수 있습니다.</translation>
     </message>
     <message>
         <source>Steer Ratio (Default: %1)</source>
@@ -585,7 +585,7 @@
     </message>
     <message>
         <source>Adjust how much openpilot needs to turn the wheel to steer. Higher values feel like driving a truck, more stable at high speeds, but harder to steer quickly at low speeds, while lower values feel like a go-kart, easier to steer in tight spots but more sensitive and less stable at high speeds.</source>
-        <translation type="unfinished"></translation>
+        <translation>오픈파일럿이 조종하기 위해 핸들을 얼마나 돌려야 하는지 조정합니다. 값이 높을수록 트럭을 운전하듯 무겁고, 고속에서는 더 안정적이지만 저속에서는 빠르게 조종하기 어렵고, 값이 낮을수록 카트를 운전하듯 가볍고, 좁은 곳에서 조종하기 쉽지만 고속에서는 더 민감하고 덜 안정적입니다.</translation>
     </message>
     <message>
         <source>comma&apos;s 2022 Taco Bell Turn Hack</source>
@@ -593,7 +593,7 @@
     </message>
     <message>
         <source>Use comma&apos;s hack they used to help handle left and right turns more precisely during their 2022 &apos;Taco Bell&apos; drive.</source>
-        <translation type="unfinished"></translation>
+        <translation>2022년 타코벨 캠페인에서 좌우 회전을 더 정확하게 처리하는 데 도움이 되는 콤마의 활용법을 소개합니다.</translation>
     </message>
     <message>
         <source>Force Auto Tune On</source>
@@ -601,7 +601,7 @@
     </message>
     <message>
         <source>Forces comma&apos;s auto lateral tuning for unsupported vehicles.</source>
-        <translation type="unfinished"></translation>
+        <translation>지원되지 않는 차량에 대해 콤마의 자동 조향 튜닝을 강제 적용합니다.</translation>
     </message>
     <message>
         <source>Force Auto Tune Off</source>
@@ -609,7 +609,7 @@
     </message>
     <message>
         <source>Forces comma&apos;s auto lateral tuning off for supported vehicles.</source>
-        <translation type="unfinished"></translation>
+        <translation>지원되는 차량에 대해 콤마의 자동 조향 튜닝을 강제로 끕니다.</translation>
     </message>
     <message>
         <source>Force Turn Desires Below Lane Change Speed</source>
@@ -617,7 +617,7 @@
     </message>
     <message>
         <source>Force the model to use turn desires when driving below the minimum lane change speed to help make left and right turns more precisely.</source>
-        <translation type="unfinished"></translation>
+        <translation>최소 차선 변경 속도 이하로 주행할 때 모델이 회전 요구 사항을 사용하도록 강제하여 좌회전과 우회전을 보다 정확하게 할 수 있도록 돕습니다.</translation>
     </message>
     <message>
         <source>Advanced Longitudinal Tuning</source>
@@ -625,7 +625,7 @@
     </message>
     <message>
         <source>Advanced settings that control how openpilot manages speed and acceleration.</source>
-        <translation type="unfinished"></translation>
+        <translation>오픈파일럿이 속도와 가속을 관리하는 방법을 제어하는 고급 설정입니다.</translation>
     </message>
     <message>
         <source>Lead Detection Confidence</source>
@@ -633,7 +633,7 @@
     </message>
     <message>
         <source>How sensitive openpilot is to detecting vehicles ahead. A lower value can help detect vehicles sooner and from farther away, but may occasionally mistake other objects for vehicles.</source>
-        <translation type="unfinished"></translation>
+        <translation>오픈파일럿이 앞의 차량을 감지하는 데 얼마나 민감한지. 값이 낮을수록 차량을 더 빨리, 더 멀리서 감지하는 데 도움이 되지만, 가끔 다른 물체를 차량으로 오인할 수 있습니다.</translation>
     </message>
     <message>
         <source>Maximum Acceleration Rate</source>
@@ -641,7 +641,7 @@
     </message>
     <message>
         <source>Set a cap on how fast openpilot can accelerate to prevent high acceleration at low speeds.</source>
-        <translation type="unfinished"></translation>
+        <translation>저속에서 높은 가속이 발생하는 것을 방지하기 위해 오픈파일럿의 가속 속도에 제한을 설정합니다.</translation>
     </message>
     <message>
         <source>Advanced Quality of Life</source>
@@ -649,7 +649,7 @@
     </message>
     <message>
         <source>Miscellaneous advanced features to improve your overall openpilot experience.</source>
-        <translation type="unfinished"></translation>
+        <translation>전반적인 오픈파일럿 경험을 개선해 주는 다양한 고급 기능.</translation>
     </message>
     <message>
         <source>Force Keep openpilot in the Standstill State</source>
@@ -665,7 +665,7 @@
     </message>
     <message>
         <source>Whenever openpilot &apos;detects&apos; a potential stop light/stop sign, force a stop where it originally detected it to prevent running the potential red light/stop sign.</source>
-        <translation type="unfinished"></translation>
+        <translation>오픈파일럿이 잠재적인 정지 신호/정지 표지판을 '감지'할 때마다 원래 감지한 위치에서 강제로 정지시켜 잠재적인 빨간 신호/정지 표지판 위반을 방지합니다.</translation>
     </message>
     <message>
         <source>Set Speed Offset</source>
@@ -673,7 +673,7 @@
     </message>
     <message>
         <source>How much higher or lower the set speed should be compared to your current set speed. For example, if you prefer to drive 5 mph above the speed limit, this setting will automatically add that difference when you adjust your set speed.</source>
-        <translation type="unfinished"></translation>
+        <translation>설정된 속도를 현재 설정된 속도와 비교했을 때 얼마나 더 높거나 낮아야 하는지입니다. 예를 들어, 속도 제한보다 5mph 더 높은 속도로 운전하는 것을 선호하는 경우, 이 설정은 설정된 속도를 조정할 때 자동으로 그 차이를 추가합니다.</translation>
     </message>
     <message>
         <source>Customize Driving Personalities</source>
@@ -697,7 +697,7 @@
     </message>
     <message>
         <source>The minimum following distance in &apos;Traffic Mode.&apos; openpilot will adjust dynamically between this value and the &apos;Aggressive&apos; profile distance based on your speed.</source>
-        <translation type="unfinished"></translation>
+        <translation>'트래픽 모드'에서의 최소 추종 거리입니다. Openpilot은 속도에 따라 이 값과 '적극적' 프로필 거리 사이를 동적으로 조정합니다.</translation>
     </message>
     <message>
         <source>Acceleration Sensitivity</source>
@@ -705,7 +705,7 @@
     </message>
     <message>
         <source>How sensitive openpilot is to changes in acceleration in &apos;Traffic Mode.&apos; Higher values result in smoother, more gradual acceleration and deceleration, while lower values allow for faster changes that may feel more abrupt.</source>
-        <translation type="unfinished"></translation>
+        <translation>'트래픽 모드'에서 오픈파일럿이 가속도 변화에 얼마나 민감한지를 나타냅니다. 값이 높을수록 가속과 감속이 더 부드럽고 점진적으로 이뤄지고, 값이 낮을수록 갑작스럽게 느껴질 수 있는 빠른 변화가 가능합니다.</translation>
     </message>
     <message>
         <source>Deceleration Sensitivity</source>
@@ -713,7 +713,7 @@
     </message>
     <message>
         <source>Controls how sensitive openpilot is to changes in deceleration in &apos;Traffic Mode.&apos; Higher values result in smoother, more gradual braking, while lower values allow for quicker, more responsive braking that may feel abrupt.</source>
-        <translation type="unfinished"></translation>
+        <translation>'트래픽 모드'에서 감속 변화에 대한 오픈파일럿의 민감도를 제어합니다. 값이 높을수록 더 부드럽고 점진적인 제동이 이루어지고, 값이 낮을수록 더 빠르고 반응성이 좋은 제동이 가능하지만 갑작스럽게 느껴질 수 있습니다.</translation>
     </message>
     <message>
         <source>Safety Distance Sensitivity</source>
@@ -721,7 +721,7 @@
     </message>
     <message>
         <source>Adjusts how cautious openpilot is around other vehicles or obstacles in &apos;Traffic Mode.&apos; Higher values increase following distances and prioritize safety, leading to more cautious driving, while lower values allow for closer following but may reduce reaction time.</source>
-        <translation type="unfinished"></translation>
+        <translation>'교통 모드'에서 오픈파일럿이 다른 차량이나 장애물 주변에서 얼마나 조심하는지를 조정합니다. 값이 클수록 추종 거리가 늘어나고 안전을 우선시하여 더 조심스러운 운전이 이루어지는 반면, 값이 작을수록 추종 거리가 짧아지지만 반응 시간이 짧아질 수 있습니다.</translation>
     </message>
     <message>
         <source>Speed Increase Responsiveness</source>
