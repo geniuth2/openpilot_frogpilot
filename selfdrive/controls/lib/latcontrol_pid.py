@@ -36,7 +36,6 @@ class LatControlPID(LatControl):
       # offset does not contribute to resistive torque
       steer_feedforward = self.get_steer_feedforward(angle_steers_des_no_offset, CS.vEgo)
 
-      self.pid._k_p = frogpilot_toggles.steer_kp
       output_steer = self.pid.update(error, override=CS.steeringPressed,
                                      feedforward=steer_feedforward, speed=CS.vEgo)
       pid_log.active = True

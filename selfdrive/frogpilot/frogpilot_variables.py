@@ -339,11 +339,11 @@ class FrogPilotVariables:
     self.frogpilot_toggles = get_frogpilot_toggles(block=False)
     self.tuning_levels = {key: lvl for key, _, lvl in frogpilot_default_params + misc_tuning_levels}
 
-    short_branch = get_build_metadata().channel
-    self.development_branch = short_branch == "FrogPilot-Development"
-    self.release_branch = short_branch == "FrogPilot"
-    self.staging_branch = short_branch == "FrogPilot-Staging"
-    self.testing_branch = short_branch == "FrogPilot-Testing"
+    self.short_branch = get_build_metadata().channel
+    self.development_branch = self.short_branch == "FrogPilot-Development"
+    self.release_branch = self.short_branch == "FrogPilot"
+    self.staging_branch = self.short_branch == "FrogPilot-Staging"
+    self.testing_branch = self.short_branch == "FrogPilot-Testing"
 
     self.frogpilot_toggles.frogs_go_moo = Path("/persist/frogsgomoo.py").is_file()
     self.frogpilot_toggles.block_user = self.development_branch and not self.frogpilot_toggles.frogs_go_moo

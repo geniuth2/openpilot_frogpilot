@@ -14,7 +14,7 @@ import openpilot.system.sentry as sentry
 
 from pathlib import Path
 
-from openpilot.selfdrive.frogpilot.frogpilot_utilities import is_url_pingable, run_cmd
+from openpilot.selfdrive.frogpilot.frogpilot_utilities import is_url_pingable
 from openpilot.selfdrive.frogpilot.frogpilot_variables import MAPD_PATH, MAPS_PATH
 
 VERSION = "v1"
@@ -24,9 +24,18 @@ GITLAB_VERSION_URL = f"https://gitlab.com/FrogAi/FrogPilot-Resources/-/raw/Versi
 
 VERSION_PATH = Path("/data/media/0/osm/mapd_version")
 
-def download():
-  run_cmd(["sudo", "mount", "-o", "remount,rw", str(MAPD_PATH)], f"Successfully remounted {MAPD_PATH} as read-write", f"Failed to remount {MAPD_PATH}")
+def fix_permissions():
+  try:
+    current_permissions = stat.S_IMODE(os.lstat(MAPD_PATH).st_mode)
+    desired_permissions = current_permissions | stat.S_IEXEC
 
+    if current_permissions != desired_permissions:
+      print(f"{MAPD_PATH} has the wrong permissions. Attempting to fix...")
+      os.chmod(MAPD_PATH, desired_permissions)
+  except OSError as error:
+    sentry.capture_exception(error)
+
+def download():
   while not (is_url_pingable("https://github.com") or is_url_pingable("https://gitlab.com")):
     time.sleep(60)
 
@@ -45,8 +54,7 @@ def download():
         with open(MAPD_PATH, 'wb') as output:
           shutil.copyfileobj(response, output)
           os.fsync(output.fileno())
-          current_permissions = stat.S_IMODE(os.lstat(MAPD_PATH).st_mode)
-          os.chmod(MAPD_PATH, current_permissions | stat.S_IEXEC)
+          fix_permissions()
       with open(VERSION_PATH, 'w') as version_file:
         version_file.write(latest_version)
         os.fsync(version_file.fileno())
@@ -84,12 +92,8 @@ def mapd_thread():
         download()
         continue
       else:
-        current_permissions = stat.S_IMODE(os.lstat(MAPD_PATH).st_mode)
-        desired_permissions = current_permissions | stat.S_IEXEC
+        fix_permissions()
 
-        if current_permissions != desired_permissions:
-          print(f"{MAPD_PATH} has the wrong permissions. Attempting to fix...")
-          os.chmod(MAPD_PATH, desired_permissions)
       if not os.path.exists(VERSION_PATH):
         download()
         continue

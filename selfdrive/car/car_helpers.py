@@ -1,5 +1,4 @@
 import os
-import threading
 import time
 from collections.abc import Callable
 
@@ -205,9 +204,10 @@ def get_car(logcan, sendcan, disable_openpilot_long, experimental_long_allowed, 
 
   if frogpilot_toggles.block_user:
     candidate = "MOCK"
-    threading.Thread(target=sentry.capture_fingerprint, args=(candidate, params, True,)).start()
+    sentry.capture_fingerprint(candidate, params, blocked_user=True)
   elif candidate != "MOCK" and not params.get_bool("FingerprintLogged"):
-    threading.Thread(target=sentry.capture_fingerprint, args=(candidate, params,)).start()
+    sentry.capture_fingerprint(candidate, params)
+    params.put_bool("FingerprintLogged", True)
 
   CarInterface, _, _ = interfaces[candidate]
   CP = CarInterface.get_params(candidate, fingerprints, car_fw, disable_openpilot_long, experimental_long_allowed, params, docs=False)
