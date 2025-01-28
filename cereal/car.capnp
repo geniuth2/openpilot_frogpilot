@@ -463,10 +463,6 @@ struct CarControl {
       startup @20;
       thisIsFine @21;
       uwu @22;
-
-
-      # NDA
-      speedDown @23;
     }
   }
 
